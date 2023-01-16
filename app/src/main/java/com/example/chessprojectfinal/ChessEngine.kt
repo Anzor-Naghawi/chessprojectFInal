@@ -92,7 +92,7 @@ class ChessEngine (var mainActivity: ChessActivity?){
             return rookmove.check(init_block, tar_block) || bishopmove.check(init_block,tar_block)
         }
         if(init_block.chesspiece?.type == "king"){
-            return kingmove.check(init_block, tar_block) || bishopmove.check(init_block,tar_block)
+            return kingmove.check(init_block, tar_block)
         }
         return false
     }
@@ -149,8 +149,7 @@ class ChessEngine (var mainActivity: ChessActivity?){
                     }
                 }
                 this.firstclick = true
-
-
+                this.db!!.closedb()
                 // switch turns
                 if(this.turn == "white"){
                     this.mainActivity!!.turnText?.text = "Blacks turn!"

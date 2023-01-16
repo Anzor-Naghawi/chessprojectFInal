@@ -3,7 +3,6 @@ package com.release.gfg1
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -12,7 +11,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
 
     override fun onCreate(db: SQLiteDatabase) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME)
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 MOVE_COL + " TEXT," +
@@ -39,12 +38,16 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.insert(TABLE_NAME, null, values)
 
 
+    }
+
+    fun closedb(){
+        val db = this.writableDatabase
         db.close()
     }
 
     companion object{
 
-        private val DATABASE_NAME = "CHESS_GAME2"
+        private val DATABASE_NAME = "CHESS_GAME3"
 
 
         private val DATABASE_VERSION = 3
